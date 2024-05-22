@@ -18,7 +18,7 @@ const createProductController = async (req: Request, res: Response) => {
       res.status(200).json({
         success: true,
         message: 'Product created successfully!',
-        createdData,
+        data: createdData,
       });
     } else {
       res.status(500).json({
@@ -41,13 +41,13 @@ const createProductController = async (req: Request, res: Response) => {
 const getAllProductController = async (req: Request, res: Response) => {
   try {
     const data = await productService.getAllProducts(
-      req.query.searchParam ? (req.query.searchParam as string) : '',
+      req.query.searchTerm ? (req.query.searchTerm as string) : '',
     );
 
     res.status(200).json({
       success: true,
-      message: req.query.searchParam
-        ? `Products matching search term '${req.query.searchParam}' fetched successfully!`
+      message: req.query.searchTerm
+        ? `Products matching search term '${req.query.searchTerm}' fetched successfully!`
         : 'Products fetched successfully!',
       data,
     });
